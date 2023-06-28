@@ -56,6 +56,8 @@ const posts = [
     }
 ];
 
+const likedPosts = [];
+
 //Creo una funzione che genera dinamicamente la card corrispondente al post con al suo interno le informazioni contenute nell'array
 function generateCard(post) {
     const postCard = document.createElement('div');
@@ -116,25 +118,74 @@ function generateCard(post) {
     postImage.appendChild(postImageImg);
     postCard.appendChild(postImage);
 
+    const postFooter = document.createElement('div');
+    postFooter.classList.add('post__footer');
+
     const likesContainer = document.createElement('div');
     likesContainer.classList.add('likes');
+    likesContainer.classList.add('js-likes');
+
+    const likesElement = document.createElement('div');
+    likesElement.classList.add('likes__ele');
 
     const likeButton = document.createElement('a');
     likeButton.classList.add('like-button');
+    likeButton.classList.add('js-like-button');
     likeButton.href = '#';
+    likeButton.setAttribute('data-postid', post.id);
+
+    const likeButtonIcon = document.createElement('i');
+    likeButtonIcon.classList.add('like-button__icon');
+    likeButtonIcon.classList.add('fas');
+    likeButtonIcon.classList.add('fa-thumbs-up');
+
     const likeButtonLabel = document.createElement('span');
     likeButtonLabel.classList.add('like-button__label');
-    likeButtonLabel.innerHTML = '<i class="fas fa-thumbs-up"></i> Like';
+    likeButtonLabel.textContent = 'Mi Piace';
+
+    likeButton.appendChild(likeButtonIcon);
     likeButton.appendChild(likeButtonLabel);
+    likesElement.appendChild(likeButton);
 
-    const likeButtonLiked = document.createElement('span');
-    likeButtonLiked.classList.add('like-button--liked');
-    likeButtonLiked.textContent = 'Liked';
+    const likesCounter = document.createElement('div');
+    likesCounter.classList.add('likes__counter');
+    const likeCounter = document.createElement('b');
+    likeCounter.id = `like-counter-${post.id}`;
+    likeCounter.classList.add('js-likes-counter');
+    likeCounter.textContent = post.likes;
+    likesCounter.innerHTML = `Piace a ${likeCounter.outerHTML} persone`;
 
-    likesContainer.appendChild(likeButton);
-    likesContainer.appendChild(likeButtonLiked);
+    likesContainer.appendChild(likesElement);
+    likesContainer.appendChild(likesCounter);
 
-    postCard.appendChild(likesContainer);
+    postFooter.appendChild(likesContainer);
+
+    postCard.appendChild(postHeader);
+    postCard.appendChild(postText);
+    postCard.appendChild(postImage);
+    postCard.appendChild(postFooter);
+
+
+    likeButton.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const likeCounter = postCard.querySelector('.js-likes-counter');
+        const postId = post.id;
+
+        if (!likeButton.classList.contains('liked')) {
+            likeButton.classList.add('liked');
+            likeCounter.textContent = parseInt(likeCounter.textContent) + 1;
+            likedPosts.push(postId);
+        } else {
+            likeButton.classList.remove('liked');
+            likeCounter.textContent = parseInt(likeCounter.textContent) - 1;
+            const index = likedPosts.indexOf(postId);
+            if (index > -1 ) {
+                likedPosts.splice(index, 1);
+            }
+        }
+
+    });
 
     return postCard;
 }
