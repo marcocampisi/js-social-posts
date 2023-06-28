@@ -69,10 +69,19 @@ function generateCard(post) {
 
     const postMetaIcon = document.createElement('div');
     postMetaIcon.classList.add('post-meta__icon');
+
     const profilePic = document.createElement('img');
     profilePic.classList.add('profile-pic');
-    profilePic.src = post.author.image;
-    profilePic.alt = post.author.name;
+    if (post.author.image) {
+        profilePic.src = post.author.image;
+        profilePic.alt = post.author.name;
+    } else {
+        profilePic.classList.add('profile-pic-default');
+        const initials = document.createElement('span');
+        initials.textContent = getInitials(post.author.name);
+        profilePic.appendChild(initials);
+    }
+
     postMetaIcon.appendChild(profilePic);
 
     const postMetaData = document.createElement('div');
@@ -136,7 +145,7 @@ function getInitials(name) {
     } else {
       return names[0].charAt(0) + names[names.length - 1].charAt(0);
     }
-  }
+}
 
 //Genero la lista dei post dinamicamente usando la funzione creata sopra
 const postsList = document.createElement('div');
