@@ -96,6 +96,7 @@ function generateCard(post) {
     const postText = document.createElement('div');
     postText.classList.add('post__text');
     postText.textContent = post.content;
+    postCard.appendChild(postText);
 
     const postImage = document.createElement('div');
     postImage.classList.add('post__image');
