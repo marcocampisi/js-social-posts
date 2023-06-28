@@ -74,7 +74,6 @@ function generateCard(post) {
     profilePic.src = post.author.image;
     profilePic.alt = post.author.name;
     postMetaIcon.appendChild(profilePic);
-    postMeta.appendChild(postMetaIcon);
 
     const postMetaData = document.createElement('div');
     postMetaData.classList.add('post-meta__data');
@@ -90,10 +89,9 @@ function generateCard(post) {
     postMetaData.appendChild(postMetaAuthor);
     postMetaData.appendChild(postMetaTime);
     postHeader.appendChild(postMeta);
-    
+    postMeta.appendChild(postMetaIcon);
     postMeta.appendChild(postMetaData);
     postCard.appendChild(postHeader);
-    postCard.appendChild(profilePic);
 
     const postText = document.createElement('div');
     postText.classList.add('post__text');
