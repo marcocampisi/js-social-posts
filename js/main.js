@@ -55,3 +55,74 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+
+//Creo una funzione che genera dinamicamente la card corrispondente al post con al suo interno le informazioni contenute nell'array
+function generateCard(post) {
+    const postCard = document.createElement('div');
+    postCard.classList.add('post')
+
+    const postHeader = document.createElement('div');
+    postHeader.classList.add('post__header');
+
+    const postMeta = document.createElement('div');
+    postMeta.classList.add('post-meta');
+
+    const postMetaIcon = document.createElement('div');
+    postMetaIcon.classList.add('post-meta__icon');
+    const profilePic = document.createElement('img');
+    profilePic.classList.add('profile-pic');
+    profilePic.src = post.author.image;
+    profilePic.alt = post.author.name;
+    postMetaIcon.appendChild(profilePic);
+
+    const postMetaData = document.createElement('div');
+    postMetaData.classList.add('post-meta__data');
+
+    const postMetaAuthor = document.createElement('span');
+    postMetaAuthor.classList.add('post-meta__author');
+    postMetaAuthor.textContent = post.author.name;
+
+    const postMetaTime = document.createElement('span');
+    postMetaTime.classList.add('post-meta__time');
+    postMetaTime.textContent = post.created;
+
+    postMetaData.appendChild(postMetaAuthor);
+    postMetaData.appendChild(postMetaTime);
+    postHeader.appendChild(postMeta);
+    postMeta.appendChild(postMetaIcon);
+    postMeta.appendChild(postMetaData);
+    postCard.appendChild(postHeader);
+    postCard.appendChild(profilePic);
+
+    const postText = document.createElement('div');
+    postText.classList.add('post__text');
+    postText.textContent = post.content;
+
+    const postImage = document.createElement('div');
+    postImage.classList.add('post__image');
+    const postImageImg = document.createElement('img');
+    postImageImg.src = post.media;
+    postImage.appendChild(postImageImg);
+
+    const likesContainer = document.createElement('div');
+    likesContainer.classList.add('likes');
+
+    const likeButton = document.createElement('a');
+    likeButton.classList.add('like-button');
+    likeButton.href = '#';
+    const likeButtonLabel = document.createElement('span');
+    likeButtonLabel.classList.add('like-button__label');
+    likeButtonLabel.textContent = 'Like';
+    likeButton.appendChild(likeButtonLabel);
+
+    const likeButtonLiked = document.createElement('span');
+    likeButtonLiked.classList.add('like-button--liked');
+    likeButtonLiked.textContent = 'Liked';
+
+    likesContainer.appendChild(likeButton);
+    likesContainer.appendChild(likeButtonLiked);
+
+    postCard.appendChild(likesContainer);
+
+    return postCard;
+}
