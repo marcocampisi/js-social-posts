@@ -103,6 +103,7 @@ function generateCard(post) {
     const postImageImg = document.createElement('img');
     postImageImg.src = post.media;
     postImage.appendChild(postImageImg);
+    postCard.appendChild(postImage);
 
     const likesContainer = document.createElement('div');
     likesContainer.classList.add('likes');
