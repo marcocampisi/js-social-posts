@@ -128,6 +128,16 @@ function generateCard(post) {
     return postCard;
 }
 
+//Genero le iniziali dell'utente da usare nel placeholder
+function getInitials(name) {
+    const names = name.split(' ');
+    if (names.length === 1) {
+      return names[0].charAt(0);
+    } else {
+      return names[0].charAt(0) + names[names.length - 1].charAt(0);
+    }
+  }
+
 //Genero la lista dei post dinamicamente usando la funzione creata sopra
 const postsList = document.createElement('div');
 postsList.classList.add('posts-list');
