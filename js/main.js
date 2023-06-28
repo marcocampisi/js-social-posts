@@ -113,7 +113,7 @@ function generateCard(post) {
     likeButton.href = '#';
     const likeButtonLabel = document.createElement('span');
     likeButtonLabel.classList.add('like-button__label');
-    likeButtonLabel.textContent = 'Like';
+    likeButtonLabel.innerHTML = '<i class="fas fa-thumbs-up"></i> Like';
     likeButton.appendChild(likeButtonLabel);
 
     const likeButtonLiked = document.createElement('span');
