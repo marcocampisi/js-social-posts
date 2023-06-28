@@ -70,11 +70,13 @@ function generateCard(post) {
     const postMetaIcon = document.createElement('div');
     postMetaIcon.classList.add('post-meta__icon');
 
-    const profilePic = document.createElement('img');
+    const profilePic = document.createElement('div');
     profilePic.classList.add('profile-pic');
     if (post.author.image) {
-        profilePic.src = post.author.image;
-        profilePic.alt = post.author.name;
+        const img = document.createElement('img');
+        img.src = post.author.image;
+        img.alt = post.author.name;
+        profilePic.appendChild(img);
     } else {
         profilePic.classList.add('profile-pic-default');
         const initials = document.createElement('span');
