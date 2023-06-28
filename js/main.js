@@ -74,6 +74,7 @@ function generateCard(post) {
     profilePic.src = post.author.image;
     profilePic.alt = post.author.name;
     postMetaIcon.appendChild(profilePic);
+    postMeta.appendChild(postMetaIcon);
 
     const postMetaData = document.createElement('div');
     postMetaData.classList.add('post-meta__data');
@@ -89,7 +90,7 @@ function generateCard(post) {
     postMetaData.appendChild(postMetaAuthor);
     postMetaData.appendChild(postMetaTime);
     postHeader.appendChild(postMeta);
-    postMeta.appendChild(postMetaIcon);
+    
     postMeta.appendChild(postMetaData);
     postCard.appendChild(postHeader);
     postCard.appendChild(profilePic);
@@ -126,3 +127,14 @@ function generateCard(post) {
 
     return postCard;
 }
+
+//Genero la lista dei post dinamicamente usando la funzione creata sopra
+const postsList = document.createElement('div');
+postsList.classList.add('posts-list');
+
+posts.forEach(post => {
+    const postCard = generateCard(post);
+    postsList.appendChild(postCard);
+});
+//Aggiungo la lista al body
+document.body.appendChild(postsList);
